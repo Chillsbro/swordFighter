@@ -9,4 +9,3 @@ const collisionsLevel1 = [
 ];
 // going through array at 16 intervals to make rows
 // returning new array to then loop through and find collision block at 292 location.
-
