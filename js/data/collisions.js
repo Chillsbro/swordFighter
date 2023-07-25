@@ -7,6 +7,8 @@ const collisionsLevel1 = [
   292, 292, 292, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 ];
+// going through array at 16 intervals to make rows
+// returning new array to then loop through and find collision block at 292 location.
 Array.prototype.parse2D = function () {
   const rows = [];
   for (let i =0; i < this.length; i+= 16) {
@@ -17,4 +19,10 @@ Array.prototype.parse2D = function () {
 };
 
 const parsedCollisions = collisionsLevel1.parse2D();
-console.log(parsedCollisions)
+parsedCollisions.forEach(row => {
+  row.forEach(symbol => {
+    if (symbol === 292) {
+      // push new collision into collision block
+    }
+  })
+})
