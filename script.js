@@ -22,13 +22,13 @@ const player = new Player({
   animations: {
     idleRight: {
       frameRate: 11,
-      frameBuffer: 14,
+      frameBuffer: 30,
       loop: true,
       imageSrc: "./img/king/idle.png",
     },
     idleLeft: {
       frameRate: 11,
-      frameBuffer: 10,
+      frameBuffer: 30,
       loop: true,
       imageSrc: "./img/king/idleLeft.png",
     },

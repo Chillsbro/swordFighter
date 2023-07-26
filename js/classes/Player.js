@@ -14,7 +14,7 @@ class Player extends Sprite {
     this.sides = {
       bottom: this.position.y + this.height,
     };
-    this.gravity = 0.1;
+    this.gravity = 0.07;
     this.collisionBlocks = collisionBlocks;
   }
 
