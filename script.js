@@ -19,7 +19,45 @@ const player = new Player({
   collisionBlocks,
   imageSrc: "./img/king/idle.png",
   frameRate: 11,
+  animations: {
+    idleRight: {
+      frameRate: 11,
+      frameBuffer: 14,
+      loop: true,
+      imageSrc: "./img/king/idle.png",
+    },
+    idleLeft: {
+      frameRate: 11,
+      frameBuffer: 10,
+      loop: true,
+      imageSrc: "./img/king/idleLeft.png",
+    },
+    runRight: {
+      frameRate: 8,
+      frameBuffer: 10,
+      loop: true,
+      imageSrc: "./img/king/runRight.png",
+    },
+    runLeft: {
+      frameRate: 8,
+      frameBuffer: 10,
+      loop: true,
+      imageSrc: "./img/king/runLeft.png",
+    },
+  },
 });
+const doors = [
+  new Sprite({
+    position: {
+      x: 0,
+      y: 0,
+    },
+    imageSrc: "./img/doorOpen.png",
+    frameRate: 5,
+    frameBuffer: 26,
+    loop: false,
+  }),
+];
 
 const keys = {
   w: {
@@ -29,6 +67,9 @@ const keys = {
     pressed: false,
   },
   d: {
+    pressed: false,
+  },
+  Space: {
     pressed: false,
   },
 };
@@ -41,9 +82,23 @@ function animate() {
     collisionBlock.draw();
   });
 
+  doors.forEach((door) => {
+    door.draw();
+  });
+
   player.velocity.x = 0;
-  if (keys.d.pressed) player.velocity.x = 5;
-  else if (keys.a.pressed) player.velocity.x = -5;
+  if (keys.d.pressed) {
+    player.switchSprite("runRight");
+    player.velocity.x = 1.3;
+    player.lastDirection = "right";
+  } else if (keys.a.pressed) {
+    player.switchSprite("runLeft");
+    player.velocity.x = -1.3;
+    player.lastDirection = "left";
+  } else {
+    if (player.lastDirection === "left") player.switchSprite("idleLeft");
+    else player.switchSprite("idleRight");
+  }
 
   player.draw();
   player.update();
