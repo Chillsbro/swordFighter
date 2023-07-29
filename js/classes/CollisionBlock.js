@@ -10,3 +10,10 @@ class CollisionBlock {
     c.fillRect(this.position.x, this.position.y, this.width, this.height);
   }
 }
+
+class Door extends CollisionBlock {
+  constructor({ position }) {
+    this.openDoor = false;
+  }
+}
+
