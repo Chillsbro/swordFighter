@@ -4,23 +4,90 @@ const c = canvas.getContext("2d");
 canvas.width = 1024;
 canvas.height = 576;
 
-const parsedCollisions = collisionsLevel1.parse2D();
-const collisionBlocks = parsedCollisions.createObjectsFrom2D();
+let parsedCollisions;
+let collisionBlocks;
+let doors;
 
-const backgroundLevel1 = new Sprite({
-  position: {
-    x: 0,
-    y: 0,
+let levels = {
+  1: {
+    init: () => {
+      parsedCollisions = collisionsLevel1.parse2D();
+      collisionBlocks = parsedCollisions.createObjectsFrom2D();
+      background = new Sprite({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        imageSrc: "./img/backgroundLevel1.png",
+      });
+      doors = [
+        new Sprite({
+          position: {
+            x: 767,
+            y: 270,
+          },
+          imageSrc: "./img/doorOpen.png",
+          frameRate: 5,
+          frameBuffer: 26,
+          loop: false,
+          autoplay: false,
+        }),
+      ];
+    },
   },
-  imageSrc: "./img/backgroundLevel1.png",
-});
-const backgroundLevel2 = new Sprite({
-  position: {
-    x: 0,
-    y: 0,
+  2: {
+    init: () => {
+      parsedCollisions = collisionsLevel2.parse2D();
+      collisionBlocks = parsedCollisions.createObjectsFrom2D();
+      background = new Sprite({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        imageSrc: "./img/backgroundLevel2.png",
+      });
+      doors = [
+        new Sprite({
+          position: {
+            x: 767,
+            y: 270,
+          },
+          imageSrc: "./img/doorOpen.png",
+          frameRate: 5,
+          frameBuffer: 26,
+          loop: false,
+          autoplay: false,
+        }),
+      ];
+    },
   },
-  imageSrc: "./img/backgroundLevel2.png",
-});
+  3: {
+    init: () => {
+      parsedCollisions = collisionsLevel3.parse2D();
+      collisionBlocks = parsedCollisions.createObjectsFrom2D();
+      background = new Sprite({
+        position: {
+          x: 0,
+          y: 0,
+        },
+        imageSrc: "./img/backgroundLevel3.png",
+      });
+      doors = [
+        new Sprite({
+          position: {
+            x: 767,
+            y: 270,
+          },
+          imageSrc: "./img/doorOpen.png",
+          frameRate: 5,
+          frameBuffer: 26,
+          loop: false,
+          autoplay: false,
+        }),
+      ];
+    },
+  },
+};
 
 const player = new Player({
   collisionBlocks,
@@ -59,19 +126,6 @@ const player = new Player({
     },
   },
 });
-const doors = [
-  new Sprite({
-    position: {
-      x: 767,
-      y: 270,
-    },
-    imageSrc: "./img/doorOpen.png",
-    frameRate: 5,
-    frameBuffer: 26,
-    loop: false,
-    autoplay: false,
-  }),
-];
 
 const keys = {
   w: {
@@ -123,3 +177,4 @@ function animate() {
   player.update();
 }
 animate();
+// when player walk through the door, we need to update the value of parsed collisions and collision blocks to match the new level.
