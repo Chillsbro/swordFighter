@@ -14,6 +14,13 @@ const backgroundLevel1 = new Sprite({
   },
   imageSrc: "./img/backgroundLevel1.png",
 });
+const backgroundLevel2 = new Sprite({
+  position: {
+    x: 0,
+    y: 0,
+  },
+  imageSrc: "./img/backgroundLevel2.png",
+});
 
 const player = new Player({
   collisionBlocks,
@@ -43,6 +50,12 @@ const player = new Player({
       frameBuffer: 10,
       loop: true,
       imageSrc: "./img/king/runLeft.png",
+    },
+    enterDoor: {
+      frameRate: 8,
+      frameBuffer: 30,
+      loop: false,
+      imageSrc: "./img/king/enterDoor.png",
     },
   },
 });
@@ -96,6 +109,11 @@ function animate() {
     player.switchSprite("runLeft");
     player.velocity.x = -1.3;
     player.lastDirection = "left";
+  } else if (keys.w.pressed) {
+    player.switchSprite("enterDoor");
+    if (player.currentFrame === 7) {
+      return;
+    }
   } else {
     if (player.lastDirection === "left") player.switchSprite("idleLeft");
     else player.switchSprite("idleRight");

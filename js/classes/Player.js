@@ -38,6 +38,7 @@ class Player extends Sprite {
     // );
     this.checkForVerticalCollisions();
   }
+ 
   switchSprite(name) {
     if (this.image == this.animations[name].image) return;
     this.currentFrame = 0;
